@@ -1,0 +1,14 @@
+{
+  "name": "restfulservice",
+  "version": "1.0",
+  "description": "Example Web Service",
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.2",
+    "swagger-ui-express": "^4.1.4"
+  }
+}

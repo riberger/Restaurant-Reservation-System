@@ -13,7 +13,7 @@ Item = require('./model/model.js');
 bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise; // for asynchronous callbacks
-mongoose.connect('mongodb+srv://Rich:Japan26@cluster0.urdoo.mongodb.net/RestaurantDB?retryWrites=true&w=majority'); // set up at mongodb.com
+mongoose.connect('mongodb+srv://USER:PASSWORD@cluster0.urdoo.mongodb.net/RestaurantDB?retryWrites=true&w=majority'); // set up at mongodb.com
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from

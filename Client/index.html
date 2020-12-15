@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <title>Big Boy's Pizzeria Reservations </title>
+      <link rel="stylesheet" href="style.css">
+     <script src="script.js"></script>
+       <style>
+      h1 {text-align: center;}
+      p {text-align: center;}
+      
+img {
+  border-radius: 50%;
+   position: absolute;
+  left: 70px;
+  top: 27px;
+}
+}
+</style>
+
+    </head>
+    <header style="background-color:white;">
+      <img src="https://toppng.com/uploads/preview/transparent-cartoon-pizza-11549978544rnyl3bi6uv.png" alt="Pig Chef" width="200" height="130">
+
+
+    <h1>Big Boi's Italian Cuisine Reservations</h1>
+    
+  </header>
+   <body style="background:url(wood.png)">
+     
+    <!-- Plotly chart will be drawn inside this div -->
+    <!-- 406349817184737-->
+    <center>
+   <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+   </center>
+  
+     <script>
+        var timeArr = [];          //an array of dates
+        var mondayArr = [];          //an array with number of cases per day
+        var tuesdayArr = [];
+        var wednesdayArr = [];
+        var thursdayArr = [];
+        var fridayArr = [];
+        var saturdayArr = [];
+        var sundayArr = [];
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var responseObj = JSON.parse(xhttp.responseText);
+            for (var row of responseObj){
+              if (row ["status"] == "OK"){
+                var time1 = row["time"];
+                var mondayR = row ["monday"];
+                var tuesdayR = row["tuesday"];
+                var wednesdayR = row["wednesday"];
+                var thursdayR = row["thursday"];
+                var fridayR = row["friday"];
+                var saturdayR = row["saturday"];
+                var sundayR = row["sunday"];
+                
+                 time1 = time1.substring(0, 20);
+                 mondayR = mondayR.substring(0,20);
+                 tuesdayR = tuesdayR.substring(0,200);
+                 wednesdayR = wednesdayR.substring(0,20);
+                 thursdayR = thursdayR.substring(0,20);
+                 fridayR = fridayR.substring(0,20);
+                 saturdayR = saturdayR.substring(0,20);
+                 sundayR = sundayR.substring(0,20);
+                 
+                 timeArr.push(time1);
+                 mondayArr.push(mondayR);
+                 tuesdayArr.push(tuesdayR);
+                 wednesdayArr.push(wednesdayR);
+                 thursdayArr.push(thursdayR);
+                 fridayArr.push(fridayR);
+                 saturdayArr.push(saturdayR);
+                 sundayArr.push(sundayR);
+              }
+            };
+
+      var title = [
+      timeArr,
+      mondayArr,
+      tuesdayArr,
+      wednesdayArr,
+      thursdayArr,
+      fridayArr,
+      saturdayArr,
+      sundayArr,]
+
+var data = [{
+  type: 'table',
+  columnwidth: [3000,3000,3000,3000,3000,3000,3000,3000,3000],
+  autosize: false,
+  header: {
+    values: [["<b>TIME</b>"], ["<b>MON</b>"],
+				 ["<b>TUES</b>"], ["<b>WED</b>"],["<b>THUR</b>"],["<b>FRI</b>"],["<b>SAT</b>"],["<b>SUN</b>"]],
+    align: "center",
+    line: {width: 1, color: 'black'},
+    fill: {color: "black"},
+    font: {family: "Arial", size: 12, color: "white"}
+  },
+  cells: {
+    values: title,
+    autosize: false,
+    align: "center",
+    line: {color: "black", width: 2},
+    font: {family: "Arial", size: 11, color: ["black"]}
+  }
+}];
+
+var layout = {
+  autosize: false,
+  width: 1200,
+  height: 500,
+  align: "center",
+   margin: {
+    l: 50,
+    r: 50,
+    b: 5,
+    t: 100,
+    pad: 0.01
+  },
+  paper_bgcolor: "#c7c7c7"
+};
+Plotly.newPlot('myDiv', data, layout);
+          };
+        }
+        //Utilizes a get request to grab the data from the Restaurant DB
+xhttp.open("GET", "https://Restaurant-Reservations-DB.riberger.repl.co/items", true);
+
+xhttp.send();
+
+      </script>
+       <div class="wrapper">
+         <h3> Select your reservation below!</h3>
+         
+      <ul>
+        <li>Monday
+          <ul> 
+            <li id = "mon 5:00PM" onclick="putRequestM5(this.id);">5:00 PM</li>
+            <li id = "mon 6:00PM" onclick="putRequestM6(this.id);">6:00 PM</li>
+            <li id = "mon 7:00PM" onclick="putRequestM7(this.id);">7:00 PM</li>
+            <li id = "mon 8:00PM" onclick="putRequestM8(this.id);">8:00 PM</li>
+            <li id = "mon 9:00PM" onclick="putRequestM9(this.id);">9:00 PM</li>
+            <li id = "mon 10:00PM" onclick="putRequestM10(this.id);">10:00 PM</li>
+          </ul>
+        </li>
+        <li>Tuesday
+          <ul>
+            <li id = "tues 5:00PM" onclick="putRequestT5(this.id);">5:00 PM</li>
+            <li id = "tues 6:00PM" onclick="putRequestT6(this.id);">6:00 PM</li>
+            <li id = "tues 7:00PM" onclick="putRequestT7(this.id);">7:00 PM</li>
+            <li id = "tues 8:00PM" onclick="putRequestT8(this.id);">8:00 PM</li>
+            <li id = "tues 9:00PM" onclick="putRequestT9(this.id);">9:00 PM</li>
+            <li id = "tues 10:00PM" onclick="putRequestT10(this.id);">10:00 PM</li>
+          </ul>
+        </li>
+        <li>Wednesday
+          <ul>
+            <li id = "wed 5:00PM" onclick="putRequestW5(this.id);">5:00 PM</li>
+            <li id = "wed 6:00PM" onclick="putRequestW6(this.id);">6:00 PM</li>
+            <li id = "wed 7:00PM" onclick="putRequestW7(this.id);">7:00 PM</li>
+            <li id = "wed 8:00PM" onclick="putRequestW8(this.id);">8:00 PM</li>
+            <li id = "wed 9:00PM" onclick="putRequestW9(this.id);">9:00 PM</li>
+            <li id = "wed 10:00PM" onclick="putRequestW10(this.id);">10:00 PM</li>
+          </ul>
+        </li>
+        <li>Thursday
+          <ul>
+            <li id = "thur 5:00PM" onclick="putRequestTh5(this.id);">5:00 PM</li>
+            <li id = "thur 6:00PM" onclick="putRequestTh6(this.id);">6:00 PM</li>
+            <li id = "thur 7:00PM" onclick="putRequestTh7(this.id);">7:00 PM</li>
+            <li id = "thur 8:00PM" onclick="putRequestTh8(this.id);">8:00 PM</li>
+            <li id = "thur 9:00PM" onclick="putRequestTh9(this.id);">9:00 PM</li>
+            <li id = "thur 10:00PM" onclick="putRequestTh10(this.id);">10:00 PM</li>
+          </ul>
+        </li>
+        <li>Friday
+          <ul>
+            <li id = "fri 5:00PM" onclick="putRequestF5(this.id);">5:00 PM</li>
+            <li id = "fri 6:00PM" onclick="putRequestF6(this.id);">6:00 PM</li>
+            <li id = "fri 7:00PM" onclick="putRequestF7(this.id);">7:00 PM</li>
+            <li id = "fri 8:00PM" onclick="putRequestF8(this.id);">8:00 PM</li>
+            <li id = "fri 9:00PM" onclick="putRequestF9(this.id);">9:00 PM</li>
+            <li id = "fri 10:00PM" onclick="putRequestF10(this.id);">10:00 PM</li>
+          </ul>
+        </li>
+        <li>Saturday
+          <ul>
+            <li id = "sat 5:00PM" onclick="putRequestS5(this.id);">5:00 PM</li>
+            <li id = "sat 6:00PM" onclick="putRequestS6(this.id);">6:00 PM</li>
+            <li id = "sat 7:00PM" onclick="putRequestS7(this.id);">7:00 PM</li>
+            <li id = "sat 8:00PM" onclick="putRequestS8(this.id);">8:00 PM</li>
+            <li id = "sat 9:00PM" onclick="putRequestS9(this.id);">9:00 PM</li>
+            <li id = "sat 10:00PM" onclick="putRequestS10(this.id);">10:00 PM</li>
+          </ul>
+        </li>
+        <li>Sunday
+          <ul>
+            <li id = "sun 5:00PM" onclick="putRequestSu5(this.id);">5:00 PM</li>
+            <li id = "sun 6:00PM" onclick="putRequestSu6(this.id);">6:00 PM</li>
+            <li id = "sun 7:00PM" onclick="putRequestSu7(this.id);">7:00 PM</li>
+            <li id = "sun 8:00PM" onclick="putRequestSu8(this.id);">8:00 PM</li>
+            <li id = "sun 9:00PM" onclick="putRequestSu9(this.id);">9:00 PM</li>
+            <li id = "sun 10:00PM" onclick="putRequestSu10(this.id);">10:00 PM</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    </body>
+  </html>
+
+
+
